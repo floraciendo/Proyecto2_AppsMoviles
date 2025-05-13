@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TipCalculator.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="10">
+            <Frame>
+                <VerticalStackLayout>
+                    <Label Text="Total por persona"/>
+                    <Label Text="{Binding TotalPerPerson}"/>
+                    <Label Text="Subtotal"/>
+                    <Label Text="{Binding Subtotal}"/>
+                    <Label Text="Propina"/>
+                    <Label Text="{Binding TipAmount}"/>
+                </VerticalStackLayout>
+            </Frame>
+            <Label Text="Valor boleta:"/>
+            <Entry x:Name="addTotal" Keyboard="Numeric" Placeholder="0.00" Text="{Binding BillAmount}"/>
+            <Label Text="Elige propina"/>
+            <HorizontalStackLayout Spacing="20">
+                <Button x:Name="Tip10" Text="10%"/>
+                <Button x:Name="Tip15" Text="15%"/>
+                <Button x:Name="Tip20" Text="20%"/>
+            </HorizontalStackLayout>
+            <Label Text="Propina"/>
+            <Slider Minimum="0" Maximum="100" Value="{Binding TipPercentage}"/>
+            <Label Text="Dividir el total"/>
+            <Label Text="{Binding TotalPeople}"/>
+            <Stepper HorizontalOptions="Center" Value="{Binding TotalPeople, Mode=TwoWay}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
