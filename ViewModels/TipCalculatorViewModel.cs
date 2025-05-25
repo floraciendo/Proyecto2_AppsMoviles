@@ -67,9 +67,12 @@ namespace TipCalculator.ViewModels
             if (TotalPeople < 1) {
                 TotalPeople = 1;
             }
+
+            // Esto arregla el problema de que si el TotalPeople = 1, muestre que el valor a pagar sea el doble
+            decimal totalWithTip = BillAmount * (1 + (decimal)TipPercentage / 100);
+            TotalPerPerson = totalWithTip / TotalPeople;
             Subtotal = BillAmount / TotalPeople;
-            TipAmount = Subtotal * TipPercentage / 100;
-            TotalPerPerson = Subtotal + TipAmount;
+            TipAmount = TotalPerPerson - Subtotal;
         }
 
     }

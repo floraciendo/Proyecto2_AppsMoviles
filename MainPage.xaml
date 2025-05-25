@@ -19,12 +19,27 @@
             <Entry x:Name="addTotal" Keyboard="Numeric" Placeholder="0.00" Text="{Binding BillAmount}"/>
             <Label Text="Elige propina"/>
             <HorizontalStackLayout Spacing="20">
-                <Button x:Name="Tip10" Text="10%"/>
-                <Button x:Name="Tip15" Text="15%"/>
-                <Button x:Name="Tip20" Text="20%"/>
+                <Button x:Name="Tip10" Text="10%" Command="{Binding SetTipPercentageCommand}">
+                    <Button.CommandParameter>
+                        <x:Int32>10</x:Int32>
+                    </Button.CommandParameter>
+                </Button>
+                
+                <Button x:Name="Tip15" Text="15%" Command="{Binding SetTipPercentageCommand}">
+                    <Button.CommandParameter>
+                        <x:Int32>15</x:Int32>
+                    </Button.CommandParameter>
+                </Button>
+
+                <Button x:Name="Tip20" Text="20%" Command="{Binding SetTipPercentageCommand}">
+                    <Button.CommandParameter>
+                        <x:Int32>20</x:Int32>
+                    </Button.CommandParameter>
+                </Button>
+
             </HorizontalStackLayout>
-            <Label Text="Propina"/>
-            <Slider Minimum="0" Maximum="100" Value="{Binding TipPercentage}"/>
+            <Label Text="{Binding TipPercentage, StringFormat='Propina: {0}%'}"/>
+            <Slider Minimum="0" Maximum="50" Value="{Binding TipPercentage}"/>
             <Label Text="Dividir el total"/>
             <Label Text="{Binding TotalPeople}"/>
             <Stepper HorizontalOptions="Center" Value="{Binding TotalPeople, Mode=TwoWay}"/>
