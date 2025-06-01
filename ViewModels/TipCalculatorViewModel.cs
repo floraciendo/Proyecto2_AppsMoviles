@@ -7,7 +7,7 @@ namespace TipCalculator.ViewModels
     {
         // Valor de la boletas
         [ObservableProperty]
-        private decimal billAmount;
+        private float billAmount;
         
         // Porcentaje de propina a agregar
         [ObservableProperty]
@@ -16,12 +16,12 @@ namespace TipCalculator.ViewModels
         // Porcentaje de la boleta que paga la persona
         // Igual a billAmount si la cantidad de personas es 1
         [ObservableProperty]
-        private decimal subtotal;
+        private float subtotal;
         
         // Porcentaje de la propina que paga la persona
         // Depende de tipPercentage y totalPeople
         [ObservableProperty]
-        private decimal tipAmount;
+        private float tipAmount;
         
         // Cantidad de persona en que se divide la boleta
         [ObservableProperty]
@@ -30,18 +30,18 @@ namespace TipCalculator.ViewModels
         // Valor total a pagar por persona
         // Suma subtotal y tipAmount
         [ObservableProperty]
-        private decimal totalPerPerson;
+        private float totalPerPerson;
 
         public TipCalculatorViewModel()
         {
             // Default values (tip percentage + total people)
-            TipPercentage = 10;
+            TipPercentage = 0;
             TotalPeople = 1;
 
             UpdateCalculations();
         }
 
-        partial void OnBillAmountChanged(decimal value) => UpdateCalculations();
+        partial void OnBillAmountChanged(float value) => UpdateCalculations();
         partial void OnTipPercentageChanged(int value) => UpdateCalculations();
         partial void OnTotalPeopleChanged(int value) => UpdateCalculations();
 
@@ -69,7 +69,7 @@ namespace TipCalculator.ViewModels
             }
 
             // Esto arregla el problema de que si el TotalPeople = 1, muestre que el valor a pagar sea el doble
-            decimal totalWithTip = BillAmount * (1 + (decimal)TipPercentage / 100);
+            float totalWithTip = BillAmount * (1 + (float)TipPercentage / 100);
             TotalPerPerson = totalWithTip / TotalPeople;
             Subtotal = BillAmount / TotalPeople;
             TipAmount = TotalPerPerson - Subtotal;

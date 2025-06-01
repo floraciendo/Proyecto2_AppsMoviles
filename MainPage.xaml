@@ -3,47 +3,63 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TipCalculator.MainPage">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="10" Spacing="10">
-            <Frame>
+    <Grid BackgroundColor="#FF1B1B1C">
+        <VerticalStackLayout Padding="15" Spacing="10">
+            <Frame Padding="10" BackgroundColor="#FF29292B" BorderColor="#FF29292B">
                 <VerticalStackLayout>
-                    <Label Text="Total por persona"/>
-                    <Label Text="{Binding TotalPerPerson}"/>
-                    <Label Text="Subtotal"/>
-                    <Label Text="{Binding Subtotal}"/>
-                    <Label Text="Propina"/>
-                    <Label Text="{Binding TipAmount}"/>
+                    <Label Text="TOTAL POR PERSONA" HorizontalOptions="Center" TextColor="Aquamarine" FontAttributes="Bold" FontSize="14"/>
+                    
+                    <!-- No encontré como hacer que quede fijo con esa proporcion usando el HorizontalStack -->
+                    <Grid ColumnDefinitions="6*,3*" Padding="10" ColumnSpacing="30">
+                        <Label Grid.Column="0" Text="{Binding TotalPerPerson, StringFormat='${0:N0}'}" VerticalOptions="Center" TextColor="White" FontAttributes="Bold" FontSize="30"/>
+                        
+                        <VerticalStackLayout Grid.Column="1" HorizontalOptions="End">
+                            <Label Text="SUBTOTAL" TextColor="White" FontAttributes="Bold"/>
+                            <Label Text="{Binding Subtotal, StringFormat='${0:N0}'}" TextColor="White"/>
+                            <Label Text="PROPINA" TextColor="White" FontAttributes="Bold"/>
+                            <Label Text="{Binding TipAmount, StringFormat='${0:N0}'}" TextColor="White"/>
+                        </VerticalStackLayout>
+                    </Grid>
                 </VerticalStackLayout>
             </Frame>
-            <Label Text="Valor boleta:"/>
-            <Entry x:Name="addTotal" Keyboard="Numeric" Placeholder="0.00" Text="{Binding BillAmount}"/>
-            <Label Text="Elige propina"/>
-            <HorizontalStackLayout Spacing="20">
-                <Button x:Name="Tip10" Text="10%" Command="{Binding SetTipPercentageCommand}">
-                    <Button.CommandParameter>
-                        <x:Int32>10</x:Int32>
-                    </Button.CommandParameter>
-                </Button>
-                
-                <Button x:Name="Tip15" Text="15%" Command="{Binding SetTipPercentageCommand}">
-                    <Button.CommandParameter>
-                        <x:Int32>15</x:Int32>
-                    </Button.CommandParameter>
-                </Button>
 
-                <Button x:Name="Tip20" Text="20%" Command="{Binding SetTipPercentageCommand}">
-                    <Button.CommandParameter>
-                        <x:Int32>20</x:Int32>
-                    </Button.CommandParameter>
-                </Button>
+            <Grid ColumnDefinitions="2*,4*" Padding="0,20">
+                <Label Grid.Column="0" VerticalOptions="Center" Text="Valor boleta:" TextColor="White"/>
+                <Entry Grid.Column="1" x:Name="addTotal" Keyboard="Numeric" Placeholder="0.00" Text="{Binding BillAmount}" TextColor="White" BackgroundColor="#FF29292B"/>
+            </Grid>
+            
+            <Grid ColumnDefinitions="1*,4*" Padding="0,20">
+                <Label Grid.Column="0" Text="Elige propina" VerticalOptions="Center" TextColor="White"/>
+                <HorizontalStackLayout HorizontalOptions="End" Grid.Column="1" Spacing="10">
+                    <Button x:Name="Tip10" Text="10%" Command="{Binding SetTipPercentageCommand}" HeightRequest="60" WidthRequest="65">
+                        <Button.CommandParameter>
+                            <x:Int32>10</x:Int32>
+                        </Button.CommandParameter>
+                    </Button>
+                    
+                    <Button x:Name="Tip15" Text="15%" Command="{Binding SetTipPercentageCommand}" HeightRequest="60" WidthRequest="65">
+                        <Button.CommandParameter>
+                            <x:Int32>15</x:Int32>
+                        </Button.CommandParameter>
+                    </Button>
 
-            </HorizontalStackLayout>
-            <Label Text="{Binding TipPercentage, StringFormat='Propina: {0}%'}"/>
-            <Slider Minimum="0" Maximum="50" Value="{Binding TipPercentage}"/>
-            <Label Text="Dividir el total"/>
-            <Label Text="{Binding TotalPeople}"/>
+                    <Button x:Name="Tip20" Text="20%" Command="{Binding SetTipPercentageCommand}" HeightRequest="60" WidthRequest="65">
+                        <Button.CommandParameter>
+                            <x:Int32>20</x:Int32>
+                        </Button.CommandParameter>
+                    </Button>
+                </HorizontalStackLayout>
+            </Grid>
+
+            <Grid ColumnDefinitions="1*,4*" Padding="0,10">
+                <Label Grid.Column="0" Text="{Binding TipPercentage, StringFormat='Propina: {0}%'}" TextColor="White"/>
+                <Slider Grid.Column="1" Minimum="0" Maximum="50" Value="{Binding TipPercentage}"/>
+            </Grid>
+      
+            <!-- Button -->
+            <Label Text="{Binding TotalPeople, StringFormat='Dividir el total: {0}'}" TextColor="White"/>
             <Stepper HorizontalOptions="Center" Value="{Binding TotalPeople, Mode=TwoWay}"/>
         </VerticalStackLayout>
-    </ScrollView>
+    </Grid>
 
 </ContentPage>
