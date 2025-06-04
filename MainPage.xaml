@@ -58,7 +58,7 @@
       
             <!-- Button -->
             <Label Text="{Binding TotalPeople, StringFormat='Dividir el total: {0}'}" TextColor="White"/>
-            <Stepper HorizontalOptions="Center" Value="{Binding TotalPeople, Mode=TwoWay}"/>
+            <Stepper HorizontalOptions="Center" Value="{Binding TotalPeople}"/>
         </VerticalStackLayout>
     </Grid>
 
